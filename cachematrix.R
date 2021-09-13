@@ -6,11 +6,11 @@
 
 makeCacheMatrix <- function(x = matrix()) {
 
-          m <- NULL# m is set to NULL, and it is an object within the makeCacheMatrix environment
+        m <- NULL                                       # m is set to NULL, and it is an object within the makeCacheMatrix environment
         set <- function(y){                             # set will assign the value of y and NULL to x and m in the parent environment
                 x <<- y
                 m <<- NULL                              # this will clear any value of m that had been cached before
-         }
+        }
         get <- function() x                             # retrieves the value of x from the parent environment of makeCacheMatrix
         setinverse <- function(solve) m <<- solve       # assigns the value of the inverse to m so it can be accessed
                                                         # after using setinverse()
@@ -26,12 +26,12 @@ makeCacheMatrix <- function(x = matrix()) {
 ## its inverse then, it will set the inverse in the input object and return the value of the inverse matrix to the parent environment.
 
 cacheSolve <- function(x, ...) {
-         m <- x$getinverse()         # gets the inverse computed by the makeCacheMatrix
-         if(!is.null(m)){            # the if statement checks if the inverse is already calculated and stored in the cache
+        m <- x$getinverse()         # gets the inverse computed by the makeCacheMatrix
+        if(!is.null(m)){            # the if statement checks if the inverse is already calculated and stored in the cache
                                      # if it is in the cache it gets the value and prints the message, if NULL it has to compute
                                      # the inverse
-                message("getting cached data")
-                return(m)
+               message("getting cached data")
+               return(m)
         }
         data <- x$get()              # retrieves the special "matrix" object from the object created by makeCacheMatrix
         m <- solve(data, ...)        # computes the inverse of the matrix
